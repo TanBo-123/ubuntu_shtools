@@ -1,0 +1,29 @@
+#!/bin/bash
+
+decompress(){
+	CUR_FILE=$1	
+	if [ $CUR_FILE = *".zip" ];then 
+		unzip  $CUR_FILE
+	elif [ $CUR_FILE = *".tar" ];then
+		tar $CUR_FILE
+	elif [ $CUR_FILE = *".tar.gz" ];then
+		tar zxvf $CUR_FILE
+        elif [ $CUR_FILE = *".tar.bz2" ];then
+		tar jxvf $CUR_FILE
+	elif [ $CUR_FILE = *".rar" ];then
+		rar a $CUR_FILE	
+	else
+		echo "There is no matching to extract the way to $CUR_FILE"
+	fi
+}
+if [ $# -gt 0 ];then
+	for file in $*
+	do
+		echo "$file"
+		decompress $file
+	done	
+else
+	echo "No need to unzip the files..."
+fi
+#CUR_FILE=$1
+#decompress $CUR_FILE
